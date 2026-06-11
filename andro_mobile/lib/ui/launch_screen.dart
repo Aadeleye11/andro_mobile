@@ -32,7 +32,7 @@ class _LaunchScreenState extends State<LaunchScreen>
   void _enterApp(BuildContext context) {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => const _AppShell()),
+      MaterialPageRoute(builder: (_) => const MainShell()),
     );
   }
 
@@ -42,7 +42,6 @@ class _LaunchScreenState extends State<LaunchScreen>
       backgroundColor: const Color(0xFF0D1117),
       body: Stack(
         children: [
-          // Constellation background
           AnimatedBuilder(
             animation: _twinkleController,
             builder: (context, _) => CustomPaint(
@@ -50,7 +49,6 @@ class _LaunchScreenState extends State<LaunchScreen>
               size: Size.infinite,
             ),
           ),
-
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -61,7 +59,6 @@ class _LaunchScreenState extends State<LaunchScreen>
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          // Logo
                           Container(
                             width: 80,
                             height: 80,
@@ -81,9 +78,7 @@ class _LaunchScreenState extends State<LaunchScreen>
                               ),
                             ),
                           ),
-
                           const SizedBox(height: 24),
-
                           const Text(
                             'ANDRO',
                             style: TextStyle(
@@ -93,9 +88,7 @@ class _LaunchScreenState extends State<LaunchScreen>
                               letterSpacing: 4,
                             ),
                           ),
-
                           const SizedBox(height: 8),
-
                           const Text(
                             'Your universe of possibilities.',
                             style: TextStyle(
@@ -105,9 +98,7 @@ class _LaunchScreenState extends State<LaunchScreen>
                               letterSpacing: 2,
                             ),
                           ),
-
                           const SizedBox(height: 32),
-
                           const Text(
                             'Explore. Connect. Grow. All in one place.',
                             textAlign: TextAlign.center,
@@ -122,8 +113,6 @@ class _LaunchScreenState extends State<LaunchScreen>
                       ),
                     ),
                   ),
-
-                  // Sign in with Google button
                   SizedBox(
                     width: double.infinity,
                     height: 52,
@@ -158,9 +147,7 @@ class _LaunchScreenState extends State<LaunchScreen>
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 24),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -186,7 +173,6 @@ class _LaunchScreenState extends State<LaunchScreen>
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 32),
                 ],
               ),
@@ -198,42 +184,12 @@ class _LaunchScreenState extends State<LaunchScreen>
   }
 }
 
-// ── App shell that owns theme state after bypassing auth ─────────────────────
-
-class _AppShell extends StatefulWidget {
-  const _AppShell();
-
-  @override
-  State<_AppShell> createState() => _AppShellState();
-}
-
-class _AppShellState extends State<_AppShell> {
-  ThemeMode _themeMode = ThemeMode.dark;
-
-  @override
-  Widget build(BuildContext context) {
-    return MainShell(
-      currentUser: const {
-        'name': 'Ayomide Adeleye',
-        'email': 'shadec137@gmail.com',
-      },
-      themeMode: _themeMode,
-      onToggleTheme: () => setState(() {
-        _themeMode =
-            _themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
-      }),
-    );
-  }
-}
-
 // ── Star constellation painter ───────────────────────────────────────────────
 
 class _ConstellationPainter extends CustomPainter {
-  final double t; // 0.0–1.0 animation value
-
+  final double t;
   _ConstellationPainter(this.t);
 
-  // Fixed star positions (normalized 0–1), seeded for consistency
   static final List<Offset> _stars = _buildStars();
   static final List<(int, int)> _edges = _buildEdges();
 
@@ -260,10 +216,8 @@ class _ConstellationPainter extends CustomPainter {
     final linePaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.6;
-
     final dotPaint = Paint()..style = PaintingStyle.fill;
 
-    // Draw constellation lines
     for (final (a, b) in _edges) {
       final p1 = Offset(_stars[a].dx * size.width, _stars[a].dy * size.height);
       final p2 = Offset(_stars[b].dx * size.width, _stars[b].dy * size.height);
@@ -271,12 +225,10 @@ class _ConstellationPainter extends CustomPainter {
       canvas.drawLine(p1, p2, linePaint);
     }
 
-    // Draw stars with per-star twinkle offset
     for (int i = 0; i < _stars.length; i++) {
       final phase = sin(t * pi * 2 + i * 1.3);
       final opacity = 0.35 + 0.45 * ((phase + 1) / 2);
       final r = 0.7 + 0.9 * ((phase + 1) / 2);
-
       dotPaint.color = Colors.white.withValues(alpha: opacity);
       canvas.drawCircle(
         Offset(_stars[i].dx * size.width, _stars[i].dy * size.height),
@@ -304,29 +256,20 @@ class _GoogleGPainter extends CustomPainter {
     final arcR = (outerR + innerR) / 2;
 
     final arcRect = Rect.fromCircle(center: Offset(cx, cy), radius: arcR);
-
     final paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = ringW
       ..strokeCap = StrokeCap.butt;
 
-    // Blue – top-right quadrant
     paint.color = const Color(0xFF4285F4);
     canvas.drawArc(arcRect, -pi / 2, pi / 2, false, paint);
-
-    // Green – bottom-right quadrant
     paint.color = const Color(0xFF34A853);
     canvas.drawArc(arcRect, 0, pi / 2, false, paint);
-
-    // Yellow – bottom-left quadrant
     paint.color = const Color(0xFFFBBC05);
     canvas.drawArc(arcRect, pi / 2, pi / 2, false, paint);
-
-    // Red – top-left quadrant
     paint.color = const Color(0xFFEA4335);
     canvas.drawArc(arcRect, pi, pi / 2, false, paint);
 
-    // Blue horizontal bar (the G crossbar)
     paint
       ..style = PaintingStyle.fill
       ..color = const Color(0xFF4285F4);
