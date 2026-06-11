@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'theme_colors.dart';
 import 'register_page.dart';
 import 'user_store.dart';
+import 'shell/main_shell.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback onToggleTheme;
@@ -50,16 +51,17 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     setState(() => _errorMessage = '');
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Welcome back, ${user['name']}!'),
-        backgroundColor: _isDark
-            ? AndroColors.darkAccent
-            : AndroColors.lightAccent,
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (_) => MainShell(
+          currentUser: user,
+          themeMode: widget.themeMode,
+          onToggleTheme: widget.onToggleTheme,
+        ),
       ),
+      (route) => false,
     );
-
-    // TODO: push to your dashboard here
   }
 
   @override
