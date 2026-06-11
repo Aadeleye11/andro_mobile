@@ -19,7 +19,6 @@ class _StartupShowcaseScreenState extends State<StartupShowcaseScreen> {
   Color get _bg => _isDark ? AndroColors.darkBackground : AndroColors.lightBackground;
   Color get _surface => _isDark ? AndroColors.darkSurface : AndroColors.lightSurface;
   Color get _accent => _isDark ? AndroColors.darkAccent : AndroColors.lightAccent;
-  Color get _amber => _isDark ? AndroColors.darkAmber : AndroColors.lightAmber;
   Color get _text => _isDark ? AndroColors.darkText : AndroColors.lightText;
   Color get _secondary => _isDark ? AndroColors.darkSecondary : AndroColors.lightSecondary;
   Color get _divider => _isDark ? AndroColors.darkDivider : AndroColors.lightDivider;

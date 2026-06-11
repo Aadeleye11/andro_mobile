@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../state/app_state.dart';
-import '../models/profile_models.dart';
 import '../theme_colors.dart';
 
 const _programmes = [

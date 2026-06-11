@@ -25,7 +25,6 @@ class _ConnectionsScreenState extends State<ConnectionsScreen>
   Color get _text => _isDark ? AndroColors.darkText : AndroColors.lightText;
   Color get _secondary => _isDark ? AndroColors.darkSecondary : AndroColors.lightSecondary;
   Color get _divider => _isDark ? AndroColors.darkDivider : AndroColors.lightDivider;
-  Color get _success => _isDark ? AndroColors.darkGreen : AndroColors.lightGreen;
   Color get _accentMuted =>
       _isDark ? const Color(0xFF1A2A4A) : const Color(0xFFEAF0FE);
 

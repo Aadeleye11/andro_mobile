@@ -37,13 +37,11 @@ class _ProfileScreenState extends State<ProfileScreen>
   bool get _isDark => Theme.of(context).brightness == Brightness.dark;
   Color get _bg => _isDark ? AndroColors.darkBackground : AndroColors.lightBackground;
   Color get _surface => _isDark ? AndroColors.darkSurface : AndroColors.lightSurface;
-  Color get _elevated => _isDark ? AndroColors.darkSurface2 : AndroColors.lightSurface2;
   Color get _accent => _isDark ? AndroColors.darkAccent : AndroColors.lightAccent;
   Color get _amber => _isDark ? AndroColors.darkAmber : AndroColors.lightAmber;
   Color get _text => _isDark ? AndroColors.darkText : AndroColors.lightText;
   Color get _secondary => _isDark ? AndroColors.darkSecondary : AndroColors.lightSecondary;
   Color get _divider => _isDark ? AndroColors.darkDivider : AndroColors.lightDivider;
-  Color get _danger => _isDark ? AndroColors.darkRed : AndroColors.lightRed;
   Color get _success => _isDark ? AndroColors.darkGreen : AndroColors.lightGreen;
   Color get _accentMuted =>
       _isDark ? const Color(0xFF1A2A4A) : const Color(0xFFEAF0FE);
