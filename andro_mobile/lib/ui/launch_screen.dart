@@ -267,7 +267,7 @@ class _ConstellationPainter extends CustomPainter {
     for (final (a, b) in _edges) {
       final p1 = Offset(_stars[a].dx * size.width, _stars[a].dy * size.height);
       final p2 = Offset(_stars[b].dx * size.width, _stars[b].dy * size.height);
-      linePaint.color = Colors.white.withOpacity(0.07 + 0.05 * t);
+      linePaint.color = Colors.white.withValues(alpha: 0.07 + 0.05 * t);
       canvas.drawLine(p1, p2, linePaint);
     }
 
@@ -277,7 +277,7 @@ class _ConstellationPainter extends CustomPainter {
       final opacity = 0.35 + 0.45 * ((phase + 1) / 2);
       final r = 0.7 + 0.9 * ((phase + 1) / 2);
 
-      dotPaint.color = Colors.white.withOpacity(opacity);
+      dotPaint.color = Colors.white.withValues(alpha: opacity);
       canvas.drawCircle(
         Offset(_stars[i].dx * size.width, _stars[i].dy * size.height),
         r,
